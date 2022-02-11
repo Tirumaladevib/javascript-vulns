@@ -1,0 +1,10 @@
+{
+  "high": true,
+  "allowlist": [],
+  "report-type": "summary",
+  "package-manager": "yarn",
+  "pass-enoaudit": true,
+  "show-found": true,
+  "show-not-found": true,
+  "skip-dev": true
+}
