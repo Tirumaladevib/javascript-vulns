@@ -1,0 +1,28 @@
+name: Validate terraform
+on:
+  push:
+    paths:
+    - "ops/terraform/**"
+    - ".github/workflows/terraform-validate.yml"
+jobs:
+  validate-tf:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment:
+          - testing
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: "Setup terraform"
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.14.10
+
+      - name: "Terraform init"
+        run: terraform -chdir=ops/terraform/environments/${{ matrix.environment }} init -backend=false
+      
+      - name: "Terraform validate"
+        run: terraform -chdir=ops/terraform/environments/${{ matrix.environment }} validate
+        
