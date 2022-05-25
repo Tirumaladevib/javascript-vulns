@@ -1,0 +1,15 @@
+node_modules
+logs
+.idea
+swagger.json
+.docker.env
+src/tsoutput
+.nyc_output
+.vscode
+tsoutput
+# Config
+.env
+.env.test
+ormconfig-test.json
+ormconfig.json
+generated-types

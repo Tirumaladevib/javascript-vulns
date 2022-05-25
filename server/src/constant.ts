@@ -1,0 +1,7 @@
+export const API = 'api'
+export const SUBSCRIBER = 'subscriber'
+export const EDIT_PROCESSING = 'edit-processing'
+export const NEW_MERITS_PROCESSING = 'new-merits-processing'
+export const UNIQUE_VALUES_PROCESSING = 'unique-values-processing'
+export const VALUE_EXTRACTION_PROCESSING = 'value-extraction-processing'
+export const ROLLBACK_PROCESSING = 'rollback-processing'

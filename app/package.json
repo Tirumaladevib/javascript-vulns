@@ -1,68 +1,78 @@
 {
-  "name": "audit-ci",
-  "version": "5.1.2",
-  "description": "Audits npm and yarn projects in CI environments",
-  "license": "Apache-2.0",
-  "main": "./lib/audit-ci.js",
-  "homepage": "https://github.com/IBM/audit-ci",
-  "bugs": "https://github.com/IBM/audit-ci/issues",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:IBM/audit-ci.git"
-  },
-  "keywords": [
-    "audit",
-    "ci",
-    "npm",
-    "yarn",
-    "security",
-    "github",
-    "actions",
-    "github-actions",
-    "circleci"
-  ],
-  "bin": {
-    "audit-ci": "./lib/audit-ci.js"
-  },
-  "files": [
-    "lib/*",
-    "README.md"
-  ],
-  "scripts": {
-    "lint": "eslint -c ./.eslintrc.json **/*.js",
-    "lint:fix": "eslint -c ./.eslintrc.json **/*.js --fix",
-    "test": "mocha --exit --timeout 40000 --recursive --reporter spec test/*.js"
-  },
-  "engines": {
-    "node": ">=10"
-  },
+  "name": "app",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "JSONStream": "^1.3.5",
-    "array.prototype.flatmap": "^1.2.5",
-    "cross-spawn": "^7.0.3",
-    "escape-string-regexp": "^4.0.0",
-    "event-stream": "4.0.1",
-    "jju": "^1.4.0",
-    "readline-transform": "1.0.0",
-    "semver": "^7.0.0",
-    "yargs": "^16.0.0"
+    "@ant-design/icons": "^4.6.3",
+    "@sentry/react": "^6.11.0",
+    "@sentry/tracing": "^6.11.0",
+    "antd": "^4.16.10",
+    "axios": "^0.21.1",
+    "lodash.debounce": "^4.0.8",
+    "query-string": "^7.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
+    "universal-cookie": "^4.0.4",
+    "uuid": "^8.3.2",
+    "web-vitals": "^1.0.1",
+    "zustand": "^3.5.9"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "eslint": "^7.0.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^8.0.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-prettier": "^4.0.0",
-    "husky": "^6.0.0",
-    "mocha": "^8.0.0",
-    "prettier": "^2.4.1",
-    "pretty-quick": "^3.1.1"
+    "@craco/craco": "^6.2.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/lodash.debounce": "^4.0.6",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.1.8",
+    "@types/uuid": "^8.3.1",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
+    "craco-less": "^1.18.0",
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-functional": "^3.2.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-sort-destructure-keys": "^1.3.5",
+    "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
+    "eslint-plugin-sort-keys-fix": "^1.1.1",
+    "prettier": "^2.3.2",
+    "react-scripts": "4.0.3",
+    "typescript": "^4.1.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged",
-      "pre-push": "npm run lint && npm run test"
-    }
+  "scripts": {
+    "start": "PORT=8000 craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "generate:clear": "rm -rf types/",
+    "generate:build": "cd ../server && yarn && yarn run build",
+    "generate:copy": "mkdir types; cp -r ../server/generated-types/entities/* types/",
+    "generate-types": "yarn run generate:clear && yarn run generate:build && yarn run generate:copy"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "./.eslintrc.json"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

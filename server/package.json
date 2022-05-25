@@ -1,0 +1,124 @@
+{
+  "name": "merit-data-cleanup-tool",
+  "version": "1.0.0",
+  "description": "Data cleanup tool",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/merit/merit-data-cleanup-tool.git"
+  },
+  "keywords": [],
+  "author": "Clearview",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/merit/merit-data-cleanup-tool/issues"
+  },
+  "homepage": "https://github.com/merit/merit-data-cleanup-tool#readme",
+  "scripts": {
+    "gcp-build": "npm run build",
+    "dev": "tsc -p ./ --watch",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"yarn dev\" \"nodemon ./tsoutput/index.js -w ./tsoutput\"",
+    "watch:cloudtask": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"yarn dev\" \"nodemon ./tsoutput/cloudTaskServer/index.js -w ./tsoutput\"",
+    "start:api": "node ./tsoutput/index.js",
+    "start:cloudtask": "node ./tsoutput/cloudTaskServer/index.js",
+    "build": "tsc -p ./",
+    "test": "NODE_ENV=test ts-mocha -p ./test/tsconfig.json 'test/**/*.ts' --exclude 'test/**/*.d.ts' --exit",
+    "coverage": "nyc yarn test",
+    "cli": "node ./tsoutput/cli/index.js",
+    "typeorm:cli": "ts-node ./node_modules/typeorm/cli",
+    "typeorm:cli:test": "ts-node ./node_modules/typeorm/cli -f ormconfig-test.json",
+    "typeorm:schema:sync": "yarn run typeorm:cli schema:sync && yarn run typeorm:cli:test schema:sync",
+    "typeorm:generate-migration": "yarn build && yarn run typeorm:cli migration:generate -n",
+    "test:buildkite": "NODE_ENV=test ts-mocha -p ./test/tsconfig.json 'test/buildkite.ts'",
+    "standardx": "standardx **/*.ts",
+    "standardx::fix": "standardx **/*.ts --fix"
+  },
+  "eslintConfig": {
+    "rules": {
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "error"
+    }
+  },
+  "standard": {
+    "ignore": [
+      "/node_modules/",
+      "/app/"
+    ]
+  },
+  "standardx": {
+    "ignore": [
+      "/node_modules/",
+      "*.js"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+      "@typescript-eslint/eslint-plugin"
+    ]
+  },
+  "dependencies": {
+    "@google-cloud/tasks": "^2.3.6",
+    "@sentry/node": "^6.11.0",
+    "@types/axios": "^0.14.0",
+    "@types/bull": "^3.15.2",
+    "@types/bull-arena": "^3.0.4",
+    "@types/cors": "^2.8.12",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.13",
+    "@types/faker": "^5.5.7",
+    "@types/ioredis": "^4.26.5",
+    "@types/json2csv": "^5.0.3",
+    "@types/lodash": "^4.14.171",
+    "@types/moment": "^2.13.0",
+    "@types/moment-timezone": "^0.5.30",
+    "@types/uuid": "^8.3.1",
+    "@types/validator": "^13.6.3",
+    "@types/winston": "^2.4.4",
+    "@types/yargs": "^17.0.2",
+    "axios": "^0.21.1",
+    "axios-rate-limit": "^1.3.0",
+    "axios-retry": "^3.1.9",
+    "bull": "^3.22.11",
+    "bull-arena": "^3.29.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "faker": "^5.5.3",
+    "fastify": "^3.19.1",
+    "fastify-auth": "^1.1.0",
+    "fastify-cookie": "^5.3.1",
+    "fastify-cors": "^6.0.2",
+    "fastify-jwt": "^3.0.1",
+    "fastify-plugin": "^3.0.0",
+    "ioredis": "^4.27.6",
+    "json2csv": "^5.0.6",
+    "lodash": "^4.17.21",
+    "middie": "^5.3.0",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
+    "pg": "^8.6.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.37",
+    "typescript": "^4.3.5",
+    "uuid": "^8.3.2",
+    "validator": "^13.6.0",
+    "winston": "^3.3.3",
+    "yargs": "^17.0.1"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.21",
+    "@types/chai-http": "^4.2.0",
+    "@types/mocha": "^8.2.3",
+    "@types/node": "^16.3.2",
+    "@types/sinon": "^10.0.6",
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "eslint": "^7.30.0",
+    "mocha": "^9.0.2",
+    "sinon": "^12.0.1",
+    "standard": "^16.0.3",
+    "standardx": "^7.0.0",
+    "ts-mocha": "^8.0.0",
+    "ts-node": "^10.1.0",
+    "ts-node-dev": "^1.1.8"
+  }
+}
