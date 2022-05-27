@@ -14,6 +14,5 @@ resource "google_storage_bucket" "frontend" {
     }
     condition {
       num_newer_versions = 1
-    }
   }
 }
