@@ -1,3 +1,4 @@
+# Testing
 resource "google_storage_bucket" "frontend" {
   name     = "enlume-sbu-us-frontend"
   location = "US"
