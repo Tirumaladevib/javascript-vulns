@@ -3,10 +3,10 @@ name: Check js vulns check
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 jobs: 
   javascript_frontend_lint:
    uses: Tirumaladevib/test1/.github/workflows/js-lint.yml@main
