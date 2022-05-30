@@ -1,0 +1,30 @@
+name: Check js vulns check
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+jobs: 
+  javascript_frontend_lint:
+   uses: Tirumaladevib/test1/.github/workflows/js-lint.yml@main
+   with:
+      workflow_id: javascript-vulns.yml
+      files_to_match: yarn.lock
+      dir: "app"
+      force_run_check: ${{github.event.schedule != ''}} 
+   secrets:
+      gh_repo_read_token: ${{ secrets.GH_REPO_READ_TOKEN }}
+      gh_token: ${{ secrets.GH_TOKEN }}
+  javascript_backend_lint:
+   uses: Tirumaladevib/test1/.github/workflows/js-lint.yml@main
+   with:
+      workflow_id: javascript-vulns.yml
+      files_to_match: yarn.lock
+      dir: "server"
+      force_run_check: ${{github.event.schedule != ''}}
+   secrets:
+      gh_repo_read_token: ${{ secrets.GH_REPO_READ_TOKEN }}
+      gh_token: ${{ secrets.GH_TOKEN }}
