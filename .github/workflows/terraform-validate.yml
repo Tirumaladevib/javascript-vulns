@@ -12,6 +12,12 @@ jobs:
         environment:
           - testing
     steps:
+      - name: Load .env and export GITHUB_BRANCH
+        run: |
+          set -a
+          source .env
+          echo "GITHUB_BRANCH=$GITHUB_BRANCH" >> $GITHUB_ENV
+          set +a
       - name: Checkout
         uses: actions/checkout@v2
         
