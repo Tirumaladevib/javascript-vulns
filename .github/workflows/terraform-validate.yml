@@ -4,6 +4,9 @@ on:
     paths:
     - "ops/terraform/**"
     - ".github/workflows/terraform-validate.yml"
+
+env:
+  GITHUB_BRANCH: td-tiru-test1
 jobs:
   validate-tf:
     runs-on: ubuntu-latest
@@ -14,10 +17,7 @@ jobs:
     steps:
       - name: Load .env and export GITHUB_BRANCH
         run: |
-          set -a
-          source .env
-          echo "GITHUB_BRANCH=$GITHUB_BRANCH" >> $GITHUB_ENV
-          set +a
+          echo "GITHUB_BRANCH=$GITHUB_BRANCH"
       - name: Checkout
         uses: actions/checkout@v2
         
